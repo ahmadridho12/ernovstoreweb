@@ -28,7 +28,6 @@
     <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
     <!--===============================================================================================-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
 
     <link rel="stylesheet" type="text/css" href="css/util.css">
         <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -253,30 +252,6 @@
 	
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
-    {{-- <script>
-        function initMap() {
-          const coords = { lat: -8.688481597018923, lng: 115.15884534196172 };
-          const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 16,
-            center: coords,
-            scrollwheel: false,
-            draggable: true,
-          });
-      
-          new google.maps.Marker({
-            position: coords,
-            map,
-            icon: {
-              url: 'images/icons/pin.png', // path ke gambar pin kamu
-              // optional: atur ukuran icon
-              size: new google.maps.Size(32, 32),
-              scaledSize: new google.maps.Size(32, 32)
-            }
-          });
-        }
-      
-        // Jalankan inisialisasi setelah halaman load
-        google.maps.event.addDomListener(window, 'load', initMap);
-      </script> --}}
+    
 </body>
 </html>
