@@ -43,6 +43,20 @@
                
             </ul>
         </li> 
+       <li class="menu-item {{ \Illuminate\Support\Facades\Route::is('sample.colors.*') ? 'active open' : '' }}">
+    <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-package"></i>
+        <div data-i18n="{{ __('Sample Color') }}">{{ __('Sample Color') }}</div>
+    </a>
+    <ul class="menu-sub">
+        <li class="menu-item {{ \Illuminate\Support\Facades\Route::is('sample.colors.*') ? 'active' : '' }}">
+            <a href="{{ route('sample.colors.index') }}" class="menu-link">
+                <div data-i18n="{{ __('Sample Color') }}">{{ __('Sample Color') }}</div>
+            </a>
+        </li>
+    </ul>
+</li>
+
         <li class="menu-item {{ \Illuminate\Support\Facades\Route::is('master.*') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-grid-alt"></i>

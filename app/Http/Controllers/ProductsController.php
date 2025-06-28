@@ -69,15 +69,16 @@ class ProductsController extends Controller
 
     // 9. Judul & Deskripsi SEO dinamis
     if ($request->filled('search')) {
-        $title = "Hasil Pencarian: " . $request->search;
-        $desc  = "Lihat hasil pencarian untuk '" . $request->search . "' di katalog produk Ernov.";
+    $title = "Search Results: " . $request->search;
+    $desc  = "View search results for '" . $request->search . "' in Ernov's product catalog.";
     } elseif ($request->filled('kategori')) {
-        $title = "Kategori: " . ucfirst($request->kategori);
-        $desc  = "Lihat produk dengan kategori '" . ucfirst($request->kategori) . "' dari koleksi Ernov.";
+        $title = "Category " . ucfirst($request->kategori);
+        $desc  = "Browse products under the '" . ucfirst($request->kategori) . "' category from Ernov's exclusive collection.";
     } else {
-        $title = "Produk Terbaru";
-        $desc  = "Lihat koleksi terbaru produk fashion kulit eksklusif hanya di Ernov.";
+        $title = "Latest Products";
+        $desc  = "Discover the latest collection of exclusive leather fashion products only at Ernov.";
     }
+
 
     // Pasang SEO
     SeoHelper::product($title, $desc, $seoImage);

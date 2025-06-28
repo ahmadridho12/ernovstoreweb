@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\SampleColorController;
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // Route untuk halaman publik (tidak perlu login)
@@ -16,8 +17,8 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('h
 Route::get('/detail/{slug}', [\App\Http\Controllers\HomeController::class, 'detail'])
     ->name('home.detail');
 
-Route::get('/product/{slug}', [ProductController::class, 'detail'])
-    ->name('product.detail');
+// Route::get('/product/{slug}', [ProductController::class, 'detail'])
+//     ->name('product.detail');
 
 // Route untuk halaman daftar produk
 Route::get('/productss', [ProductsController::class, 'index'])->name('home.productss');
@@ -28,6 +29,8 @@ Route::get('/faq', [\App\Http\Controllers\FaqController::class, 'index'])->name(
 Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('home.contact');
 // Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
+Route::get('/sample-colors', [SampleColorController::class, 'userIndex'])->name('sample_colors.user_index');
+
 // Rute yang memerlukan login
 Route::middleware(['auth', 'session.timeout'])->group(function () {
     // Halaman yang sebelumnya ditandai sebagai home sekarang diubah menjadi PageController
@@ -102,6 +105,11 @@ Route::middleware(['auth', 'session.timeout'])->group(function () {
 
     
     });
+    Route::prefix('sample')->as('sample.')->group(function () {
+    Route::resource('colors', SampleColorController::class)->except(['show', 'create', 'edit']);
+});
+
+
 
     Route::prefix('product')->as('product.')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('index');
@@ -109,8 +117,8 @@ Route::middleware(['auth', 'session.timeout'])->group(function () {
         Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
         Route::post('/store', [ProductController::class, 'store'])->name('store');
         // Kemudian rute dinamis
-        // Route::get('/{id}', [ProductController::class, 'show'])->name('show');
-        Route::get('/{product:slug}', [ProductController::class, 'show'])->name('show');
+        Route::get('/{id}', [ProductController::class, 'show'])->name('show');
+        // Route::get('/{product:slug}', [ProductController::class, 'show'])->name('show');
 
         Route::get('/{id}/edit', [ProductController::class, 'edit'])->name('edit');
         Route::put('/{id}', [ProductController::class, 'update'])->name('update');

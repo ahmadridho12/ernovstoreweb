@@ -846,7 +846,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .logo-mobile img {
-    max-width: calc(100% - 20px);
+    max-width: calc(100% - 48px);
     max-height: 100%;
     position: absolute;
     top: 0;
@@ -901,7 +901,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 .main-menu-m {
     padding-top: 10px;
     padding-bottom: 10px;
-    background-color: #717fe0;
+    background-color: #404040;
 }
 
 .main-menu-m > li > a {
@@ -953,7 +953,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 /*---------------------------------------------*/
 .sub-menu-m {
-    background-color: #fff;
+    background-color: #404040;
     padding: 10px 15px 10px 32px;
     display: none;
 }
@@ -961,7 +961,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 .sub-menu-m a {
     font-family: Roboto-Regular;
     font-size: 14px;
-    color: #666;
+    color: #fff;
     line-height: 2.5;
     padding: 5px 0 5px 0;
 }

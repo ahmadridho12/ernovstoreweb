@@ -30,7 +30,7 @@
     <div class="wrap-menu-desktop">
         <nav class="limiter-menu-desktop container">
             <a href="#" class="logo">
-                <img src="{{ asset('images/icons/ernovv.svg') }}" alt="IMG-LOGO">
+<img src="{{ asset('images/icons/logoernovterbaru.svg') }}" alt="IMG-LOGO" style="width: 150px; height: auto;">
             </a>
 
             <div class="menu-desktop">
@@ -64,8 +64,9 @@
                     </li>
 
                     <li class="">
-                        <a href="https://www.ernov-bali.com/home/sample_color" target="_blank" rel="noopener noreferrer">Sample Color</a>
+                        <a href="{{ route('sample_colors.user_index') }}"  rel="noopener noreferrer">Sample Color</a>
                     </li>
+
 
                     <li class="{{ request()->routeIs('home.contact') ? 'active-menu' : '' }}">
                         <a href="{{ route('home.contact') }}">Contact</a>
@@ -85,7 +86,7 @@
     <!-- Header Mobile -->
     <div class="wrap-header-mobile">
         <div class="logo-mobile">
-            <a href="{{ url('/') }}"><img src="{{ asset('images/icons/ernovv.svg') }}" alt="IMG-LOGO"></a>
+            <a href="{{ url('/') }}"><img src="{{ asset('images/icons/logoernovterbaru.svg') }}" alt="IMG-LOGO"></a>
         </div>
         <div class="wrap-icon-header flex-w flex-r-m m-r-15">
             <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
@@ -160,7 +161,7 @@
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
                 </span>
             </li>
-           
+            <li><a href="{{ route('sample_colors.user_index') }}">Sample Colors</a></li>
             <li><a href="{{ url('/contact') }}">Contact</a></li>
         </ul>
     </div>

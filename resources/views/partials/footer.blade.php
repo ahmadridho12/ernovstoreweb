@@ -17,8 +17,7 @@
     <div class="container">
         <div class="row">
               <div class="col-sm-6 col-lg-3 p-b-50">
-                <img src="{{ asset('images/icons/ernov-logo.png') }}" alt="Ernov Logo" style="max-width: 150px;">
-                <p class="stext-107 cl7 p-t-20">Your trusted leather goods partner.</p>
+                <img src="{{ asset('images/icons/logoernovnewwhite.svg') }}" alt="Ernov Logo" style="max-width: 150px;">
             </div>
             <div class="col-sm-6 col-lg-3 p-b-50">
                 <h4 class="stext-301 cl0 p-b-30">
@@ -86,11 +85,11 @@
                         <i class="fa-brands fa-facebook"></i>
                     </a>
                 
-                    <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                    <a href="https://www.instagram.com/ernovbali?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
                         <i class="fa-brands fa-instagram"></i>
                     </a>
 
-                    <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                    <a href="https://www.tiktok.com/@ernov_bali?is_from_webapp=1&sender_device=pc" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
                         <i class="fa-brands fa-tiktok"></i>
                     </a>
                 </div>

@@ -258,7 +258,7 @@
 						<img src="{{ asset('images/default-product.jpg') }}" alt="Default">
 					  @endif
 	  
-					  <a href="{{ route('home.detail', $rel->id_produk) }}"
+<a href="{{ route('home.detail', $rel->slug) }}"
 						 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 						Quick View
 					  </a>
@@ -266,7 +266,7 @@
 	  
 					<div class="block2-txt flex-w flex-t p-t-14">
 					  <div class="block2-txt-child1 flex-col-l">
-						<a href="{{ route('home.detail', $rel->id_produk) }}"
+<a href="{{ route('home.detail', $rel->slug) }}"
 							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"
 							style="font-size: 16px; line-height: 19px; font-weight: 500; color: #404040;">
 							{{ $rel->nama }}
