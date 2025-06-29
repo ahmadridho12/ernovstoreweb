@@ -17,12 +17,13 @@
             $('#editModal input#foto_lama').val(foto); // Simpan nilai foto lama
             
             if(foto) {
-                $('#foto-preview img').attr('src', '{{ asset('storage') }}/' + foto);
+                $('#foto-preview img').attr('src', '{{ asset('') }}' + foto);
                 $('#foto-preview').show();
             } else {
                 $('#foto-preview img').attr('src', '');
                 $('#foto-preview').hide();
             }
+
             });
         
     </script>
@@ -70,7 +71,7 @@
                                 </span>
                             </td>
                             <td>
-                                <img src="{{ asset('storage/' . $slider->foto) }}" alt="Foto Slider" style="max-width: 100px;">
+                            <img src="{{ asset($slider->foto) }}" alt="Foto Slider" style="max-width: 100px;">
                             </td>
                             
                             <td>

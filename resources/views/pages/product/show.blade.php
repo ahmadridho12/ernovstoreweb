@@ -16,7 +16,7 @@
                             <div class="carousel-inner">
                                 @foreach($product->photos as $key => $photo)
                                     <div class="carousel-item @if($key == 0) active @endif">
-                                        <img src="{{ asset('storage/' . $photo->foto) }}" class="d-block w-100" alt="{{ $product->nama }}" style="object-fit: cover; height: 300px;">
+                                        <img src="{{ asset($photo->foto) }}" class="d-block w-100" alt="{{ $product->nama }}" style="object-fit: cover; height: 300px;">
                                     </div>
                                 @endforeach
                             </div>

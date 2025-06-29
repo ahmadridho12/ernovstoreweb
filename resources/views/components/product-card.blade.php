@@ -1,10 +1,19 @@
 <div class="col-md-3 mb-2">
     <div class="card border-1" style="width: 100%;">
         <!-- Foto Produk -->
-        <img src="{{ asset('storage/' . $product->photos->first()->foto) }}"
-             class="card-img-top"
-             alt="{{ $product->nama }}"
-             style="object-fit: cover; height: 150px;">
+        @if($product->photos->isNotEmpty())
+        <img src="{{ asset($product->photos->first()->foto) }}"
+            class="card-img-top"
+            alt="{{ $product->nama }}"
+            style="object-fit: cover; height: 150px;">
+        @else
+            <img src="{{ asset('images/default-product.jpg') }}"
+                class="card-img-top"
+                alt="Default Product"
+                style="object-fit: cover; height: 150px;">
+        @endif
+
+
   {{-- <img src="{{ storage_url('photos', $product->photos->first()->foto) }}"
         class="card-img-top"
         alt="{{ $product->nama }}"

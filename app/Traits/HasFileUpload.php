@@ -12,7 +12,7 @@ trait HasFileUpload
     public function uploadFile($file, $folder = 'photos')
     {
         $filename = uniqid() . '.' . $file->extension();
-        $destination = '/home/username/public_html/katalog.zrnfarm.com/' . $folder;
+        $destination = '/home/zrnn6322/public_html/katalog.zrnfarm.com/' . $folder;
 
         // Pastikan folder ada
         if (!is_dir($destination)) {
@@ -30,7 +30,7 @@ trait HasFileUpload
      */
     public function deleteFile($path)
     {
-        $fullPath = '/home/username/public_html/katalog.zrnfarm.com/' . $path;
+        $fullPath = '/home/zrnn6322/public_html/katalog.zrnfarm.com/' . $path;
 
         if ($path && file_exists($fullPath)) {
             unlink($fullPath);

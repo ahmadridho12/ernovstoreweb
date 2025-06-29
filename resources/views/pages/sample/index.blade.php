@@ -18,12 +18,13 @@
         $('#editModal input#foto_lama').val(foto); // Simpan nilai foto lama
 
         if(foto) {
-            $('#foto-preview img').attr('src', '{{ asset('storage') }}/' + foto);
+            $('#foto-preview img').attr('src', '/' + foto); // jika foto path dari root public
             $('#foto-preview').show();
         } else {
             $('#foto-preview img').attr('src', '');
             $('#foto-preview').hide();
         }
+
     });
 </script>
 @endpush
@@ -69,7 +70,7 @@
 
                 <td>
                     @if($sample->foto)
-                        <img src="{{ asset('storage/' . $sample->foto) }}" alt="Foto Sample" style="max-width: 100px;">
+                        <img src="{{ asset($sample->foto) }}" alt="Foto Sample" style="max-width: 100px;">
                     @else
                         <span class="text-muted">Tidak ada foto</span>
                     @endif

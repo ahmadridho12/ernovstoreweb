@@ -133,7 +133,7 @@
             <div class="row">
                 @foreach($product->photos as $photo)
                     <div class="col-md-3 mb-2">
-                        <img src="{{ asset('storage/' . $photo->foto) }}" class="img-thumbnail" style="height: 100px; object-fit: cover;" alt="Photo">
+                        <img src="{{ asset($photo->foto) }}" class="img-thumbnail" style="height: 100px; object-fit: cover;" alt="Photo">
                         <form action="{{ route('product.photo.destroy', ['id' => $product->id_produk, 'photoId' => $photo->id]) }}" method="POST" class="mt-1">
                             @csrf
                             @method('DELETE')
