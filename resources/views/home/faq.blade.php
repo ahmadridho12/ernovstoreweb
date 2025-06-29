@@ -8,7 +8,7 @@
 	{!! JsonLd::generate() !!}
     <!-- Favicon -->
    <!--===============================================================================================-->	
-   <link rel="icon" style="width: 100%" type="image/png" href="{{ asset('images/icons/ernovv.svg') }}"/>
+ 	<link rel="icon" style="width: 100%" type="image/png" href="{{ asset('images/icons/logoernovnewwhite.svg') }}"/>
    <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->

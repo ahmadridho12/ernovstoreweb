@@ -21,7 +21,7 @@
     <meta name="description" content=""/>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('images/icons/ernovv.svg') }}"/>
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/icons/logoernovnewwhite.svg') }}"/>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>

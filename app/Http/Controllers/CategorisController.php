@@ -81,7 +81,7 @@ class CategorisController extends Controller
         $request->validate([
             'nama'         => 'required|string|max:255',
             // 'judul'        => 'required|string|max:255',
-            'foto'         => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10048',
+            'foto'         => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'foto_sampul'  => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10048',
         ]);
         

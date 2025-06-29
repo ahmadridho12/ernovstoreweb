@@ -141,7 +141,7 @@ public function update(Request $request, $id): RedirectResponse
         'size'        => 'nullable|string|max:255',
         'harga_diskon' => 'nullable|numeric|min:0',
         'status'       => 'required|in:active,inactive',
-        'fotos.*'      => 'nullable|file|mimes:jpg,jpeg,png|max:10048'
+        'fotos.*'      => 'nullable|file|mimes:jpg,jpeg,png|max:2048'
     ]);
 
     DB::beginTransaction();

@@ -5,7 +5,10 @@
              class="card-img-top"
              alt="{{ $product->nama }}"
              style="object-fit: cover; height: 150px;">
-
+  {{-- <img src="{{ storage_url('photos', $product->photos->first()->foto) }}"
+        class="card-img-top"
+        alt="{{ $product->nama }}"
+        style="object-fit: cover; height: 150px;"> --}}
         <div class="card-body text-left p-2">
             <div class="d-flex justify-content-between align-items-center">
                 <!-- Nama Produk -->

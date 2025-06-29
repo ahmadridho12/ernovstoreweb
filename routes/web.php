@@ -6,7 +6,8 @@ use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SampleColorController;
-
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // Route untuk halaman publik (tidak perlu login)
 // Di routes/web.php, untuk halaman publik detail produk:
@@ -14,6 +15,25 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('h
 //     ->name('home.detail');
 //     Route::get('/product/{id}', [ProductController::class, 'detail'])
 //      ->name('product.detail');
+// Route::get('/storage/{folder}/{filename}', function ($folder, $filename) {
+//     $allowedFolders = ['photos', 'products', 'sample_color'];
+
+//     if (!in_array($folder, $allowedFolders)) {
+//         abort(403, 'Akses folder tidak diizinkan.');
+//     }
+
+//     $path = storage_path("app/public/{$folder}/{$filename}");
+
+//     if (!File::exists($path)) {
+//         abort(404, 'File tidak ditemukan.');
+//     }
+
+//     $mimeType = File::mimeType($path);
+//     $contents = File::get($path);
+
+//     return Response::make($contents, 200)->header("Content-Type", $mimeType);
+// })->where(['folder' => '[a-zA-Z0-9_-]+', 'filename' => '.+']);
+
 Route::get('/detail/{slug}', [\App\Http\Controllers\HomeController::class, 'detail'])
     ->name('home.detail');
 
@@ -127,3 +147,22 @@ Route::middleware(['auth', 'session.timeout'])->group(function () {
     });
     
 });
+Route::get('/storage/{folder}/{filename}', function ($folder, $filename) {
+    $allowedFolders = ['photos', 'products', 'sample_color'];
+
+    if (!in_array($folder, $allowedFolders)) {
+        abort(403, 'Akses folder tidak diizinkan.');
+    }
+
+    $path = storage_path("app/public/{$folder}/{$filename}");
+
+    if (!File::exists($path)) {
+        abort(404, 'File tidak ditemukan.');
+    }
+
+    $mimeType = File::mimeType($path);
+    $contents = File::get($path);
+
+    return Response::make($contents, 200)->header("Content-Type", $mimeType);
+})->where(['folder' => '[a-zA-Z0-9_-]+', 'filename' => '.+']);
+
