@@ -49,7 +49,7 @@ class CategorisController extends Controller
             if ($request->hasFile('foto')) {
                 $file = $request->file('foto');
                 $filename = time().'_'.$file->getClientOriginalName();
-                $file->move('/home/username/public_html/katalog.zrnfarm.com/photos', $filename);
+                $file->move('/home/zrnn6322/public_html/katalog.zrnfarm.com/photos', $filename);
                 $category->foto = 'photos/'.$filename;
             }
             
@@ -57,7 +57,7 @@ class CategorisController extends Controller
             if ($request->hasFile('foto_sampul')) {
                 $fileSampul = $request->file('foto_sampul');
                 $filenameSampul = time().'_'.$fileSampul->getClientOriginalName();
-                $fileSampul->move('/home/username/public_html/katalog.zrnfarm.com/photos', $filenameSampul);
+                $fileSampul->move('/home/zrnn6322/public_html/katalog.zrnfarm.com/photos', $filenameSampul);
                 $category->foto_sampul = 'photos/'.$filenameSampul;
             }
 
@@ -97,28 +97,28 @@ class CategorisController extends Controller
             // Upload Foto Baru jika ada
             if ($request->hasFile('foto')) {
                 // Hapus foto lama jika ada
-                $oldPath = '/home/username/public_html/katalog.zrnfarm.com/'.$category->foto;
+                $oldPath = '/home/zrnn6322/public_html/katalog.zrnfarm.com/'.$category->foto;
                 if (file_exists($oldPath)) {
                     unlink($oldPath);
                 }
 
                 $file = $request->file('foto');
                 $filename = time().'_'.$file->getClientOriginalName();
-                $file->move('/home/username/public_html/katalog.zrnfarm.com/photos', $filename);
+                $file->move('/home/zrnn6322/public_html/katalog.zrnfarm.com/photos', $filename);
                 $category->foto = 'photos/'.$filename;
             }
             
             // Upload Foto Sampul Baru jika ada
             if ($request->hasFile('foto_sampul')) {
                 // Hapus foto sampul lama jika ada
-                $oldPathSampul = '/home/username/public_html/katalog.zrnfarm.com/'.$category->foto_sampul;
+                $oldPathSampul = '/home/zrnn6322/public_html/katalog.zrnfarm.com/'.$category->foto_sampul;
                 if (file_exists($oldPathSampul)) {
                     unlink($oldPathSampul);
                 }
 
                 $fileSampul = $request->file('foto_sampul');
                 $filenameSampul = time().'_'.$fileSampul->getClientOriginalName();
-                $fileSampul->move('/home/username/public_html/katalog.zrnfarm.com/photos', $filenameSampul);
+                $fileSampul->move('/home/zrnn6322/public_html/katalog.zrnfarm.com/photos', $filenameSampul);
                 $category->foto_sampul = 'photos/'.$filenameSampul;
             }
             
@@ -139,13 +139,13 @@ class CategorisController extends Controller
     {
         try {
             // Hapus foto jika ada
-            $fotoPath = '/home/username/public_html/katalog.zrnfarm.com/'.$category->foto;
+            $fotoPath = '/home/zrnn6322/public_html/katalog.zrnfarm.com/'.$category->foto;
             if (file_exists($fotoPath)) {
                 unlink($fotoPath);
             }
 
             // Hapus foto sampul jika ada
-            $fotoSampulPath = '/home/username/public_html/katalog.zrnfarm.com/'.$category->foto_sampul;
+            $fotoSampulPath = '/home/zrnn6322/public_html/katalog.zrnfarm.com/'.$category->foto_sampul;
             if (file_exists($fotoSampulPath)) {
                 unlink($fotoSampulPath);
             }
