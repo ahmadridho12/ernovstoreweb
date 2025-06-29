@@ -74,15 +74,16 @@
 
 							<div class="slick3 gallery-lb">
 								@foreach($product->photos as $photo)
-								<div class="item-slick3" data-thumb="{{ asset('storage/' . $photo->foto) }}">
+								<div class="item-slick3" data-thumb="{{ asset($photo->foto) }}">
 									<div class="wrap-pic-w pos-relative">
-										<img src="{{ asset('storage/' . $photo->foto) }}" alt="{{ $product->nama }}">
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset('storage/' . $photo->foto) }}">
+										<img src="{{ asset($photo->foto) }}" alt="{{ $product->nama }}">
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset($photo->foto) }}">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
 								</div>
 								@endforeach
+
 							</div>
 							
 						</div>
@@ -252,11 +253,12 @@
 				  <div class="block2">
 					<div class="block2-pic hov-img0">
 					  @if($rel->photos->isNotEmpty())
-						<img src="{{ asset('storage/' . $rel->photos->first()->foto) }}"
-							 alt="{{ $rel->nama }}">
-					  @else
+						<img src="{{ asset($rel->photos->first()->foto) }}"
+							alt="{{ $rel->nama }}">
+					@else
 						<img src="{{ asset('images/default-product.jpg') }}" alt="Default">
-					  @endif
+					@endif
+
 	  
 <a href="{{ route('home.detail', $rel->slug) }}"
 						 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">

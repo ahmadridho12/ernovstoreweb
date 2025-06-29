@@ -35,7 +35,6 @@ class CategorisController extends Controller
     {
         $request->validate([
             'nama'         => 'required|string|max:255',
-            // 'judul'        => 'required|string|max:255',
             'foto'         => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10048',
             'foto_sampul'  => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10048',
         ]);
@@ -48,18 +47,22 @@ class CategorisController extends Controller
             
             // Upload Foto
             if ($request->hasFile('foto')) {
-                $foto = $request->file('foto')->store('photos', 'public');
-                $category->foto = $foto;
+                $file = $request->file('foto');
+                $filename = time().'_'.$file->getClientOriginalName();
+                $file->move('/home/username/public_html/katalog.zrnfarm.com/photos', $filename);
+                $category->foto = 'photos/'.$filename;
             }
             
             // Upload Foto Sampul
             if ($request->hasFile('foto_sampul')) {
-                $fotoSampul = $request->file('foto_sampul')->store('photos', 'public');
-                $category->foto_sampul = $fotoSampul;
+                $fileSampul = $request->file('foto_sampul');
+                $filenameSampul = time().'_'.$fileSampul->getClientOriginalName();
+                $fileSampul->move('/home/username/public_html/katalog.zrnfarm.com/photos', $filenameSampul);
+                $category->foto_sampul = 'photos/'.$filenameSampul;
             }
-    
+
             $category->save();
-           
+        
             DB::commit();
             return redirect()->route('master.category.index')
                 ->with('success', 'Category berhasil ditambahkan');
@@ -69,6 +72,7 @@ class CategorisController extends Controller
                 ->with('error', 'Gagal menyimpan: ' . $e->getMessage());
         }
     }
+
     
     public function edit($id): View
     {
@@ -76,12 +80,11 @@ class CategorisController extends Controller
         return view('category.edit', compact('category'));
     }
 
-    public function update(Request $request, $id): RedirectResponse
+   public function update(Request $request, $id): RedirectResponse
     {
         $request->validate([
             'nama'         => 'required|string|max:255',
-            // 'judul'        => 'required|string|max:255',
-            'foto'         => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'foto'         => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10048',
             'foto_sampul'  => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:10048',
         ]);
         
@@ -94,23 +97,29 @@ class CategorisController extends Controller
             // Upload Foto Baru jika ada
             if ($request->hasFile('foto')) {
                 // Hapus foto lama jika ada
-                if ($category->foto && Storage::disk('public')->exists($category->foto)) {
-                    Storage::disk('public')->delete($category->foto);
+                $oldPath = '/home/username/public_html/katalog.zrnfarm.com/'.$category->foto;
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
                 }
-                
-                $foto = $request->file('foto')->store('photos', 'public');
-                $category->foto = $foto;
+
+                $file = $request->file('foto');
+                $filename = time().'_'.$file->getClientOriginalName();
+                $file->move('/home/username/public_html/katalog.zrnfarm.com/photos', $filename);
+                $category->foto = 'photos/'.$filename;
             }
             
             // Upload Foto Sampul Baru jika ada
             if ($request->hasFile('foto_sampul')) {
                 // Hapus foto sampul lama jika ada
-                if ($category->foto_sampul && Storage::disk('public')->exists($category->foto_sampul)) {
-                    Storage::disk('public')->delete($category->foto_sampul);
+                $oldPathSampul = '/home/username/public_html/katalog.zrnfarm.com/'.$category->foto_sampul;
+                if (file_exists($oldPathSampul)) {
+                    unlink($oldPathSampul);
                 }
-                
-                $fotoSampul = $request->file('foto_sampul')->store('photos', 'public');
-                $category->foto_sampul = $fotoSampul;
+
+                $fileSampul = $request->file('foto_sampul');
+                $filenameSampul = time().'_'.$fileSampul->getClientOriginalName();
+                $fileSampul->move('/home/username/public_html/katalog.zrnfarm.com/photos', $filenameSampul);
+                $category->foto_sampul = 'photos/'.$filenameSampul;
             }
             
             $category->save();
@@ -121,20 +130,24 @@ class CategorisController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()
-                ->with('error', 'Gagal memperbarui: ' . $e->getMessage() . ' - Line: ' . $e->getLine());
+                ->with('error', 'Gagal memperbarui: ' . $e->getMessage());
         }
     }
+
 
     public function destroy(Categoris $category)
     {
         try {
             // Hapus foto jika ada
-            if ($category->foto && Storage::disk('public')->exists($category->foto)) {
-                Storage::disk('public')->delete($category->foto);
+            $fotoPath = '/home/username/public_html/katalog.zrnfarm.com/'.$category->foto;
+            if (file_exists($fotoPath)) {
+                unlink($fotoPath);
             }
+
             // Hapus foto sampul jika ada
-            if ($category->foto_sampul && Storage::disk('public')->exists($category->foto_sampul)) {
-                Storage::disk('public')->delete($category->foto_sampul);
+            $fotoSampulPath = '/home/username/public_html/katalog.zrnfarm.com/'.$category->foto_sampul;
+            if (file_exists($fotoSampulPath)) {
+                unlink($fotoSampulPath);
             }
             
             $category->delete();
@@ -145,4 +158,5 @@ class CategorisController extends Controller
                 ->with('error', 'Gagal menghapus: ' . $e->getMessage());
         }
     }
+
 }

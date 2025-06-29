@@ -69,18 +69,19 @@
                             <td>{{ $category->judul }}</td>
                             <td>
                                 @if($category->foto)
-                                    <img src="{{ asset('storage/' . $category->foto) }}" alt="Foto Category" style="max-width: 100px;">
+                                    <img src="{{ asset($category->foto) }}" alt="Foto Category" style="max-width: 100px;">
                                 @else
                                     <span class="text-muted">Tidak ada foto</span>
                                 @endif
                             </td>
                             <td>
                                 @if($category->foto_sampul)
-                                    <img src="{{ asset('storage/' . $category->foto_sampul) }}" alt="Foto Category" style="max-width: 100px;">
+                                    <img src="{{ asset($category->foto_sampul) }}" alt="Foto Sampul Category" style="max-width: 100px;">
                                 @else
-                                    <span class="text-muted">Tidak ada foto</span>
+                                    <span class="text-muted">Tidak ada foto sampul</span>
                                 @endif
                             </td>
+
                             <td>
                                 <button class="btn btn-info btn-sm btn-edit"
                                         data-id="{{ $category->id_category }}"

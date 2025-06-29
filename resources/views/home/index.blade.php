@@ -170,39 +170,40 @@
 	
 	<!-- Slider -->
 	<section class="section-slide">
-    <div class="wrap-slick1">
-        <div class="slick1">
-            @foreach ($sliders as $slider)
-                <div class="item-slick1 position-relative" style="background-image: url('{{ asset('storage/' . $slider->foto) }}'); background-size: cover; background-position: center;">
-                    <!-- Overlay hitam transparan -->
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.2); z-index: 1;"></div>
-                    
-                    <div class="container h-full" style="position: relative; z-index: 2;">
-                        <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-                            <!-- Layer: Menampilkan nama slider -->
-                            <div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
-                                <span class="ltext-101 cl2 respon2">
-                                    {{ $slider->judul }}
-                                </span>
-                            </div>
-                            <!-- Layer: Menampilkan judul slider -->
-                            <div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn" data-delay="800">
-                                <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-                                    {{ $slider->nama }}
-                                </h2>
-                            </div>
-                            <!-- Layer: Tombol Shop Now -->
-                            <div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
-                                <a href="{{ route('home.productss') }}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-                                    Shop Now
-                                </a>
-                            </div>
+   <div class="wrap-slick1">
+    <div class="slick1">
+        @foreach ($sliders as $slider)
+            <div class="item-slick1 position-relative" style="background-image: url('{{ asset($slider->foto) }}'); background-size: cover; background-position: center;">
+                <!-- Overlay hitam transparan -->
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.2); z-index: 1;"></div>
+                
+                <div class="container h-full" style="position: relative; z-index: 2;">
+                    <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
+                        <!-- Layer: Menampilkan nama slider -->
+                        <div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
+                            <span class="ltext-101 cl2 respon2">
+                                {{ $slider->judul }}
+                            </span>
+                        </div>
+                        <!-- Layer: Menampilkan judul slider -->
+                        <div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn" data-delay="800">
+                            <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
+                                {{ $slider->nama }}
+                            </h2>
+                        </div>
+                        <!-- Layer: Tombol Shop Now -->
+                        <div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
+                            <a href="{{ route('home.productss') }}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+                                Shop Now
+                            </a>
                         </div>
                     </div>
                 </div>
-            @endforeach
-        </div>
+            </div>
+        @endforeach
     </div>
+</div>
+
 </section>
 <br>
 {{-- <div class="grid-container">
@@ -222,7 +223,7 @@
                 <div class="col-sm-6 col-md-4 col-xl-4 p-b-30 m-lr-auto">
 					<!-- Block1 -->
 						<div class="block1 wrap-pic-w">
-							<img src="{{ asset('storage/' . $kategori->foto) }}" alt="IMG-BANNER">
+							<img src="{{ asset($kategori->foto) }}" alt="IMG-BANNER">
 							<a href="{{ route('home.productss', ['kategori' => $kategori->nama]) }}" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 								<div class="block1-txt-child1 flex-col-l">
 									<!-- Ganti "Women" dengan nama kategori -->
@@ -262,10 +263,11 @@
 		</div>
 	
 		@if($kategori->foto_sampul)
-			<img src="{{ asset('storage/' . $kategori->foto_sampul) }}" alt="{{ $kategori->nama }}">
+		<img src="{{ asset($kategori->foto_sampul) }}" alt="{{ $kategori->nama }}">
 		@else
 			<img src="{{ asset('images/default-banner.jpg') }}" alt="{{ $kategori->nama }}">
 		@endif
+
 	</section>
 
 	<!-- Produk dari kategori tersebut -->
@@ -278,10 +280,11 @@
 							<div class="block2">
 								<div class="block2-pic hov-img0">
 									@if($product->photos->isNotEmpty())
-										<img src="{{ asset('storage/' . $product->photos->first()->foto) }}" alt="{{ $product->nama }}">
+										<img src="{{ asset($product->photos->first()->foto) }}" alt="{{ $product->nama }}">
 									@else
 										<img src="{{ asset('images/default.png') }}" alt="{{ $product->nama }}">
 									@endif
+
 									<a href="{{ route('home.detail', $product->slug) }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 										Quick View
 									</a>
@@ -457,10 +460,11 @@
 							<div class="block2">
 								<div class="block2-pic hov-img0">
 									@if($product->photos->isNotEmpty())
-										<img src="{{ asset('storage/' . $product->photos->first()->foto) }}" alt="{{ $product->nama }}">
+										<img src="{{ asset($product->photos->first()->foto) }}" alt="{{ $product->nama }}">
 									@else
 										<img src="{{ asset('images/default-product.jpg') }}" alt="Default Product">
 									@endif
+
 									<a href="{{ route('home.detail', $product->slug) }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 										Quick View
 									</a>

@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\SampleColor;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use App\Traits\HasFileUpload;
 
 class SampleColorController extends Controller
 {
+    use HasFileUpload;
+
     public function index(Request $request)
     {
         $search = $request->input('search');
@@ -47,8 +49,7 @@ class SampleColorController extends Controller
 
             // Upload foto jika ada
             if ($request->hasFile('foto')) {
-                $foto = $request->file('foto')->store('sample_colors', 'public');
-                $sample->foto = $foto;
+                $sample->foto = $this->uploadFile($request->file('foto'), 'sample_colors');
             }
 
             $sample->save();
@@ -79,13 +80,7 @@ class SampleColorController extends Controller
 
             // Upload foto baru jika ada
             if ($request->hasFile('foto')) {
-                // Hapus foto lama jika ada
-                if ($sample->foto && Storage::disk('public')->exists($sample->foto)) {
-                    Storage::disk('public')->delete($sample->foto);
-                }
-
-                $foto = $request->file('foto')->store('sample_colors', 'public');
-                $sample->foto = $foto;
+                $sample->foto = $this->updateFile($request->file('foto'), $sample->foto, 'sample_colors');
             }
 
             $sample->save();
@@ -106,9 +101,7 @@ class SampleColorController extends Controller
             $sample = SampleColor::findOrFail($id_sample_color);
 
             // Hapus foto jika ada
-            if ($sample->foto && Storage::disk('public')->exists($sample->foto)) {
-                Storage::disk('public')->delete($sample->foto);
-            }
+            $this->deleteFile($sample->foto);
 
             $sample->delete();
 
@@ -119,11 +112,10 @@ class SampleColorController extends Controller
                 ->with('error', 'Gagal menghapus: ' . $e->getMessage());
         }
     }
-public function userIndex()
-{
-    $samples = SampleColor::orderBy('created_at', 'desc')->paginate(20);
-    return view('home.samplecolor', compact('samples'));
-}
 
-
+    public function userIndex()
+    {
+        $samples = SampleColor::orderBy('created_at', 'desc')->paginate(20);
+        return view('home.samplecolor', compact('samples'));
+    }
 }

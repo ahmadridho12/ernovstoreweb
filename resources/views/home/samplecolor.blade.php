@@ -49,14 +49,14 @@
             @forelse($samples as $sample)
                 <div class="col-6 col-sm-6 col-md-4 col-lg-3 mb-4">
                     <div class="card">
-                        <a href="{{ asset('storage/' . $sample->foto) }}" class="popup-image">
+                        <a href="{{ asset($sample->foto) }}" class="popup-image">
                             @if($sample->foto)
-                            <img src="{{ asset('storage/' . $sample->foto) }}" class="card-img-top zoom-hover" alt="{{ $sample->kode_sample }}">
-                        @else
-                            <img src="{{ asset('images/default-product.jpg') }}" class="card-img-top zoom-hover" alt="Default Image">
-                        @endif
-
+                                <img src="{{ asset($sample->foto) }}" class="card-img-top zoom-hover" alt="{{ $sample->kode_sample }}">
+                            @else
+                                <img src="{{ asset('images/default-product.jpg') }}" class="card-img-top zoom-hover" alt="Default Image">
+                            @endif
                         </a>
+
                         <div class="card-body">
                             <h5 class="card-title" style="font-weight: bold">{{ $sample->kode_sample }}</h5>
                             <p class="card-text">
