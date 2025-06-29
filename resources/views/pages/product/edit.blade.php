@@ -4,11 +4,11 @@
     $(document).ready(function () {
         $('#add-photo').click(function () {
             let index = $('#photo-input-container .input-group').length;
-            let inputHtml = 
+            let inputHtml = `
                 <div class="input-group mb-2">
                     <input type="file" class="form-control" name="fotos[]" />
                     <button type="button" class="btn btn-danger remove-photo">Remove</button>
-                </div>;
+                </div>`;
             $('#photo-input-container').append(inputHtml);
         });
 
@@ -17,6 +17,7 @@
         });
     });
 </script>
+
 
 @section('content')
     <x-breadcrumb :values="[__('Edit Produk'), $product->nama]" />
