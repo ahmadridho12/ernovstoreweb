@@ -15,9 +15,11 @@
                         <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                                 @foreach($product->photos as $key => $photo)
-                                    <div class="carousel-item @if($key == 0) active @endif">
-                                        <img src="{{ asset($photo->foto) }}" class="d-block w-100" alt="{{ $product->nama }}" style="object-fit: cover; height: 300px;">
-                                    </div>
+                                    <img src="{{ asset('products/' . basename($photo->foto)) }}"
+                                    class="d-block w-100"
+                                    alt="{{ $product->nama }}"
+                                    style="object-fit: cover; height: 300px;">
+
                                 @endforeach
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
