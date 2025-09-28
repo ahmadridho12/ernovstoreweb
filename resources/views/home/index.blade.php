@@ -502,10 +502,11 @@
             <div class="slick1 h-full">
                 @foreach ($sliders as $slider)
                     <div class="item-slick1 position-relative h-full"
-                        style="background-image: url('{{ $slider->foto_url_cache ?? $slider->foto_url }}');
-               background-size: cover;
-               background-position: center;
-               height: 100vh;">
+                        style="background-image: url('{{ slider_image_url($slider->foto) }}');
+                        background-size: cover;
+                        background-position: center;
+                        height: 100vh;">
+
                         <!-- Overlay -->
                         <div
                             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -644,8 +645,8 @@
                     <div class="col-sm-6 col-md-4 col-xl-4 p-b-30 m-lr-auto">
                         <!-- Block1 -->
                         <div class="block1 wrap-pic-w">
-                            <img src="{{ $kategori->foto_url_cache ?? $kategori->foto_url }}"
-                                alt="{{ $kategori->nama }}" loading="lazy">
+                            <img src="{{ $kategori->foto_url }}" alt="{{ $kategori->nama }}" loading="lazy">
+
                             <div class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                                 <div class="block1-txt-child1 flex-col-l">
                                     <span class="block1-name ltext-102 trans-04 p-b-8">

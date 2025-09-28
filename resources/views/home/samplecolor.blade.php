@@ -92,7 +92,7 @@
 
 
     <!-- Footer -->
-    @include('partials.footer')
+    @include('partials.footeris')
 
     <!-- Back to top -->
     <div class="btn-back-to-top" id="myBtn">

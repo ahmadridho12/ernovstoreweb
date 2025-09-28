@@ -115,7 +115,7 @@
 
 
     <!-- Footer -->
-    @include('partials.footer')
+    @include('partials.footeris')
 
 
 

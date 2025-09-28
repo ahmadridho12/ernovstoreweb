@@ -6,13 +6,16 @@ use Illuminate\Support\Facades\Storage;
 
 trait HasFileUpload
 {
+    /**
+     * Upload file ke storage (local) atau public_html (production)
+     */
     public function uploadFile($file, $folder = 'photos')
     {
         $filename = uniqid() . '.' . $file->extension();
 
         if (app()->environment('production')) {
-            // 🚀 Simpan langsung ke public_html (hosting)
-            $destination = '/home/zrnn6322/public_html/katalog.zrnfarm.com/' . $folder;
+            // 🚀 Hosting: simpan ke public_html langsung
+            $destination = public_path($folder);
 
             if (!is_dir($destination)) {
                 mkdir($destination, 0755, true);
@@ -20,19 +23,23 @@ trait HasFileUpload
 
             $file->move($destination, $filename);
 
+            // Path yang disimpan di DB → relative
             return $folder . '/' . $filename;
         } else {
-            // 🚀 Simpan ke storage Laravel (local)
+            // 🚀 Local: simpan ke storage/app/public
             return $file->storeAs($folder, $filename, 'public');
         }
     }
 
+    /**
+     * Hapus file dari storage atau public_html
+     */
     public function deleteFile($path)
     {
         if (!$path) return;
 
         if (app()->environment('production')) {
-            $fullPath = '/home/zrnn6322/public_html/katalog.zrnfarm.com/' . $path;
+            $fullPath = public_path($path);
 
             if (file_exists($fullPath)) {
                 unlink($fullPath);
@@ -44,6 +51,9 @@ trait HasFileUpload
         }
     }
 
+    /**
+     * Update file → hapus lama, upload baru
+     */
     public function updateFile($newFile, $oldPath, $folder = 'photos')
     {
         $this->deleteFile($oldPath);
