@@ -645,7 +645,7 @@
                     <div class="col-sm-6 col-md-4 col-xl-4 p-b-30 m-lr-auto">
                         <!-- Block1 -->
                         <div class="block1 wrap-pic-w">
-                            <img src="{{ $category->foto_url }}" alt="{{ $kategori->nama }}" loading="lazy">
+                            <img src="{{ $kategori->foto_url }}" alt="{{ $kategori->nama }}" loading="lazy">
                             {{-- <img src="{{ category_image_url($kategori->foto_url) }}" alt="{{ $kategori->nama }}"
                                 loading="lazy"> --}}
 
