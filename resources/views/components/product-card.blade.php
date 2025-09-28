@@ -1,21 +1,17 @@
 <div class="col-md-3 mb-2">
     <div class="card border-1" style="width: 100%;">
         <!-- Foto Produk -->
-       @if($product->photos->isNotEmpty())
-    <img src="{{ asset('products/' . basename($product->photos->first()->foto)) }}"
-        class="card-img-top"
-        alt="{{ $product->nama }}"
-        style="object-fit: cover; height: 150px;">
-@else
-    <img src="{{ asset('images/default-product.jpg') }}"
-        class="card-img-top"
-        alt="Default Product"
-        style="object-fit: cover; height: 150px;">
-@endif
+        @if ($product->photos->isNotEmpty())
+            <img src="{{ $product->thumbnail_url }}" class="card-img-top" alt="{{ $product->nama }}"
+                style="object-fit: cover; height: 150px;">
+        @else
+            <img src="{{ asset('images/default-product.jpg') }}" class="card-img-top" alt="Default Product"
+                style="object-fit: cover; height: 150px;">
+        @endif
 
 
 
-  {{-- <img src="{{ storage_url('photos', $product->photos->first()->foto) }}"
+        {{-- <img src="{{ storage_url('photos', $product->photos->first()->foto) }}"
         class="card-img-top"
         alt="{{ $product->nama }}"
         style="object-fit: cover; height: 150px;"> --}}
@@ -27,11 +23,10 @@
                 <!-- Dropdown -->
                 <div class="dropdown d-inline-block">
                     <button class="btn p-0" type="button" id="dropdown-{{ $product->id_produk }}"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="bx bx-dots-vertical-rounded"></i>
                     </button>
-                    <div class="dropdown-menu dropdown-menu-end"
-                         aria-labelledby="dropdown-{{ $product->id_produk }}">
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-{{ $product->id_produk }}">
                         <a class="dropdown-item" href="{{ route('product.show', $product->id_produk) }}">
                             {{ __('menu.general.view') }}
                         </a>
@@ -39,7 +34,7 @@
                             {{ __('edit') }}
                         </a>
                         <form action="{{ route('product.destroy', $product->id_produk) }}" class="d-inline"
-                              method="post">
+                            method="post">
                             @csrf
                             @method('DELETE')
                             <span class="dropdown-item cursor-pointer btn-delete">

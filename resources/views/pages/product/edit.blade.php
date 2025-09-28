@@ -1,8 +1,8 @@
 @extends('layout.main')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('#add-photo').click(function () {
+    $(document).ready(function() {
+        $('#add-photo').click(function() {
             let index = $('#photo-input-container .input-group').length;
             let inputHtml = `
                 <div class="input-group mb-2">
@@ -12,7 +12,7 @@
             $('#photo-input-container').append(inputHtml);
         });
 
-        $(document).on('click', '.remove-photo', function () {
+        $(document).on('click', '.remove-photo', function() {
             $(this).closest('.input-group').remove();
         });
     });
@@ -31,10 +31,11 @@
                 <!-- Pilih Kategori -->
                 <div class="col-sm-12 col-12 col-md-6 col-lg-3">
                     <label for="kategori_id" class="form-label">{{ __('Kategori') }}</label>
-                    <select name="kategori_id" id="kategori_id" class="form-control @error('kategori_id') is-invalid @enderror">
+                    <select name="kategori_id" id="kategori_id"
+                        class="form-control @error('kategori_id') is-invalid @enderror">
                         <option value="">-- Pilih Kategori --</option>
-                        @foreach($kategoris as $kategori)
-                            <option value="{{ $kategori->id_category }}" @if($kategori->id_category == $product->kategori_id) selected @endif>
+                        @foreach ($kategoris as $kategori)
+                            <option value="{{ $kategori->id_category }}" @if ($kategori->id_category == $product->kategori_id) selected @endif>
                                 {{ $kategori->nama }}
                             </option>
                         @endforeach
@@ -46,31 +47,31 @@
 
                 <!-- Nama Produk -->
                 <div class="col-sm-12 col-12 col-md-6 col-lg-3">
-                    <x-input-form name="nama" :label="__('Nama Produk')" :value="$product->nama"/>
+                    <x-input-form name="nama" :label="__('Nama Produk')" :value="$product->nama" />
                 </div>
 
                 <!-- Harga -->
                 <div class="col-sm-12 col-12 col-md-6 col-lg-3">
-                    <x-input-form name="harga" :label="__('Harga')" type="number" step="0.01" :value="$product->harga"/>
+                    <x-input-form name="harga" :label="__('Harga')" type="number" step="0.01" :value="$product->harga" />
                 </div>
 
-              <!-- Harga Diskon -->
-        <div class="col-sm-12 col-md-6 col-lg-3">
-            <x-input-form name="harga_diskon" :label="__('Harga Diskon')" type="number" step="0.01" :value="$product->harga_diskon ?? ''"/>
-        </div>
+                <!-- Harga Diskon -->
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                    <x-input-form name="harga_diskon" :label="__('Harga Diskon')" type="number" step="0.01" :value="$product->harga_diskon ?? ''" />
+                </div>
 
-        <!-- Status Diskon -->
-        <div class="col-sm-12 col-md-6 col-lg-3">
-            <label for="status" class="form-label">{{ __('Status Diskon') }}</label>
-            <select name="status" id="status" class="form-control">
-                <option value="active" {{ $product->status == 'active' ? 'selected' : '' }}>Aktif</option>
-                <option value="inactive" {{ $product->status == 'inactive' ? 'selected' : '' }}>Tidak Aktif</option>
-            </select>
-        </div>
+                <!-- Status Diskon -->
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                    <label for="status" class="form-label">{{ __('Status Diskon') }}</label>
+                    <select name="status" id="status" class="form-control">
+                        <option value="active" {{ $product->status == 'active' ? 'selected' : '' }}>Aktif</option>
+                        <option value="inactive" {{ $product->status == 'inactive' ? 'selected' : '' }}>Tidak Aktif</option>
+                    </select>
+                </div>
 
                 <!-- Subjudul -->
                 <div class="col-sm-12 col-12 col-md-6 col-lg-3">
-                    <x-input-form name="subjudul" :label="__('Subjudul')" :value="$product->subjudul"/>
+                    <x-input-form name="subjudul" :label="__('Subjudul')" :value="$product->subjudul" />
                 </div>
                 <br>
                 <!-- Deskripsi -->
@@ -84,27 +85,27 @@
                 <br>
                 <!-- Berat -->
                 <div class="col-sm-12 col-12 col-md-6 col-lg-4">
-                    <x-input-form name="berat" :label="__('Berat (kg)')" type="number" step="0.01" :value="$product->berat"/>
+                    <x-input-form name="berat" :label="__('Berat (kg)')" type="number" step="0.01" :value="$product->berat" />
                 </div>
 
                 <!-- Dimensi -->
                 <div class="col-sm-12 col-12 col-md-6 col-lg-4">
-                    <x-input-form name="dimensi" :label="__('Dimensi')" :value="$product->dimensi"/>
+                    <x-input-form name="dimensi" :label="__('Dimensi')" :value="$product->dimensi" />
                 </div>
 
                 <!-- Material -->
                 <div class="col-sm-12 col-12 col-md-6 col-lg-4">
-                    <x-input-form name="material" :label="__('Material')" :value="$product->material"/>
+                    <x-input-form name="material" :label="__('Material')" :value="$product->material" />
                 </div>
 
                 <!-- Warna -->
                 <div class="col-sm-12 col-12 col-md-6 col-lg-4">
-                    <x-input-form name="color" :label="__('Warna')" :value="$product->color"/>
+                    <x-input-form name="color" :label="__('Warna')" :value="$product->color" />
                 </div>
 
                 <!-- Ukuran -->
                 <div class="col-sm-12 col-12 col-md-6 col-lg-4">
-                    <x-input-form name="size" :label="__('Ukuran')" :value="$product->size"/>
+                    <x-input-form name="size" :label="__('Ukuran')" :value="$product->size" />
                 </div>
 
                 <!-- Input File Baru (untuk upload tambahan) -->
@@ -132,13 +133,14 @@
         </div>
         <div class="card-body">
             <div class="row">
-                @foreach($product->photos as $photo)
+                @foreach ($product->photos as $photo)
                     <div class="col-md-3 mb-2">
-                    <img src="{{ asset('products/' . basename($photo->foto)) }}" 
-                        class="img-thumbnail" 
-                        style="height: 100px; object-fit: cover;" 
-                        alt="Photo">
-                        <form action="{{ route('product.photo.destroy', ['id' => $product->id_produk, 'photoId' => $photo->id]) }}" method="POST" class="mt-1">
+                        <img src="{{ $photo->foto_url }}" class="img-thumbnail" style="height: 100px; object-fit: cover;"
+                            alt="Photo">
+
+                        <form
+                            action="{{ route('product.photo.destroy', ['id' => $product->id_produk, 'photoId' => $photo->id]) }}"
+                            method="POST" class="mt-1">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
@@ -148,4 +150,4 @@
             </div>
         </div>
     </div>
-@endsection 
+@endsection

@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Categoris;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
+use App\Traits\HasFileUpload; // ⬅️ tambahkan ini
 
 class CategorisController extends Controller
 {
+    use HasFileUpload; // ⬅️ aktifkan trait
+
     public function index(Request $request)
     {
         $search = $request->input('search');
-
         $query = Categoris::query();
 
         if ($search) {
@@ -47,14 +48,12 @@ class CategorisController extends Controller
 
             // Upload Foto
             if ($request->hasFile('foto')) {
-                $path = $request->file('foto')->store('photos', 'public');
-                $category->foto = $path; // simpan relative path
+                $category->foto = $this->uploadFile($request->file('foto'), 'photos');
             }
 
             // Upload Foto Sampul
             if ($request->hasFile('foto_sampul')) {
-                $pathSampul = $request->file('foto_sampul')->store('photos', 'public');
-                $category->foto_sampul = $pathSampul;
+                $category->foto_sampul = $this->uploadFile($request->file('foto_sampul'), 'photos');
             }
 
             $category->save();
@@ -91,20 +90,12 @@ class CategorisController extends Controller
 
             // Foto baru
             if ($request->hasFile('foto')) {
-                if ($category->foto && Storage::disk('public')->exists($category->foto)) {
-                    Storage::disk('public')->delete($category->foto);
-                }
-                $path = $request->file('foto')->store('photos', 'public');
-                $category->foto = $path;
+                $category->foto = $this->updateFile($request->file('foto'), $category->foto, 'photos');
             }
 
             // Foto sampul baru
             if ($request->hasFile('foto_sampul')) {
-                if ($category->foto_sampul && Storage::disk('public')->exists($category->foto_sampul)) {
-                    Storage::disk('public')->delete($category->foto_sampul);
-                }
-                $pathSampul = $request->file('foto_sampul')->store('photos', 'public');
-                $category->foto_sampul = $pathSampul;
+                $category->foto_sampul = $this->updateFile($request->file('foto_sampul'), $category->foto_sampul, 'photos');
             }
 
             $category->save();
@@ -122,13 +113,8 @@ class CategorisController extends Controller
     public function destroy(Categoris $category)
     {
         try {
-            if ($category->foto && Storage::disk('public')->exists($category->foto)) {
-                Storage::disk('public')->delete($category->foto);
-            }
-
-            if ($category->foto_sampul && Storage::disk('public')->exists($category->foto_sampul)) {
-                Storage::disk('public')->delete($category->foto_sampul);
-            }
+            $this->deleteFile($category->foto);
+            $this->deleteFile($category->foto_sampul);
 
             $category->delete();
 

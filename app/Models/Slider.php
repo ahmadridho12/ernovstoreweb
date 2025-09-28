@@ -1,6 +1,5 @@
 <?php
 
-// app/Models/Slider.php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,20 +17,11 @@ class Slider extends Model
     ];
 
     /**
-     * Accessor untuk URL foto slider - kompatibel lokal & shared hosting
+     * Accessor untuk URL foto slider
      */
     public function getFotoUrlAttribute()
     {
-        if (empty($this->foto)) {
-            return asset('images/no-slider.jpg');
-        }
-
-        // Direct implementation tanpa helper untuk menghindari masalah cache
-        if (file_exists(public_path('storage'))) {
-            return asset('storage/photos/' . basename($this->foto));
-        }
-
-        return url('/storage/photos/' . basename($this->foto));
+        return slider_image_url($this->foto);
     }
 
     /**

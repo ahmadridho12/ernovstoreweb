@@ -1,6 +1,5 @@
 <?php
 
-// app/Models/Product.php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -15,9 +14,6 @@ class Product extends Model
         'color', 'size', 'slug'
     ];
 
-    /**
-     * Relasi ke model ProductPhoto
-     */
     public function photos()
     {
         return $this->hasMany(ProductPhoto::class, 'product_id', 'id_produk');
@@ -34,54 +30,32 @@ class Product extends Model
     }
 
     /**
-     * Accessor untuk URL gambar utama - kompatibel lokal & shared hosting
+     * Ambil foto utama (thumbnail)
      */
-    public function getMainImageUrlAttribute()
+    public function getThumbnailUrlAttribute()
     {
-        // 1. Cek apakah ada relasi photos
-        if ($this->photos && $this->photos->isNotEmpty()) {
-            $photoUrl = $this->photos->first()->url;
-
-            if (file_exists(public_path('storage'))) {
-                return asset('storage/products/' . basename($photoUrl));
-            }
-            return url('/storage/products/' . basename($photoUrl));
+        if ($this->photos->isNotEmpty()) {
+            return product_image_url($this->photos->first()->foto);
         }
-
-        // 2. Kalau nggak ada photos, cek field foto di tabel products
-        if (isset($this->foto) && $this->foto) {
-            if (file_exists(public_path('storage'))) {
-                return asset('storage/products/' . basename($this->foto));
-            }
-            return url('/storage/products/' . basename($this->foto));
-        }
-
-        // 3. Default image
         return asset('images/default-product.jpg');
     }
 
     /**
-     * Accessor untuk URL gambar - alias dari main_image_url
+     * Alias untuk kompatibilitas
      */
-    public function getImageUrlAttribute()
+    public function getMainImageUrlAttribute()
     {
-        return $this->main_image_url;
+        return $this->thumbnail_url;
     }
 
     /**
-     * Get all photo URLs untuk gallery
+     * Semua foto untuk gallery
      */
     public function getPhotoUrlsAttribute()
     {
-        if ($this->photos && $this->photos->isNotEmpty()) {
-            return $this->photos->map(function ($photo) {
-                if (file_exists(public_path('storage'))) {
-                    return asset('storage/products/' . basename($photo->url));
-                }
-                return url('/storage/products/' . basename($photo->url));
-            });
+        if ($this->photos->isNotEmpty()) {
+            return $this->photos->map(fn ($photo) => product_image_url($photo->foto));
         }
-
-        return collect([$this->main_image_url]);
+        return collect([asset('images/default-product.jpg')]);
     }
 }

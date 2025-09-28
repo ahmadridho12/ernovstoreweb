@@ -7,27 +7,25 @@ use Illuminate\Support\Facades\Storage;
 trait HasFileUpload
 {
     /**
-     * Upload file ke storage (local) atau public_html (production)
+     * Upload file ke storage (local) atau public_html (hosting/production)
      */
     public function uploadFile($file, $folder = 'photos')
     {
-        $filename = uniqid() . '.' . $file->extension();
+        $filename = uniqid() . '.' . $file->getClientOriginalExtension();
 
-        if (app()->environment('production')) {
-            // 🚀 Hosting: simpan ke public_html langsung
+        if (file_exists(public_path('storage'))) {
+            // 🚀 Local (pakai symlink storage)
+            return $file->storeAs($folder, $filename, 'public');
+            // hasil: photos/nama.jpg atau products/nama.jpg
+        } else {
+            // 🚀 Hosting (tanpa symlink → langsung ke public_html/folder)
             $destination = public_path($folder);
-
             if (!is_dir($destination)) {
                 mkdir($destination, 0755, true);
             }
-
             $file->move($destination, $filename);
 
-            // Path yang disimpan di DB → relative
             return $folder . '/' . $filename;
-        } else {
-            // 🚀 Local: simpan ke storage/app/public
-            return $file->storeAs($folder, $filename, 'public');
         }
     }
 
@@ -38,15 +36,16 @@ trait HasFileUpload
     {
         if (!$path) return;
 
-        if (app()->environment('production')) {
-            $fullPath = public_path($path);
-
-            if (file_exists($fullPath)) {
-                unlink($fullPath);
-            }
-        } else {
+        if (file_exists(public_path('storage'))) {
+            // 🚀 Local
             if (Storage::disk('public')->exists($path)) {
                 Storage::disk('public')->delete($path);
+            }
+        } else {
+            // 🚀 Hosting
+            $fullPath = public_path($path);
+            if (file_exists($fullPath)) {
+                unlink($fullPath);
             }
         }
     }
@@ -58,5 +57,31 @@ trait HasFileUpload
     {
         $this->deleteFile($oldPath);
         return $this->uploadFile($newFile, $folder);
+    }
+
+    /**
+     * Shortcut khusus untuk produk (folder: products)
+     */
+    public function uploadProductFile($file)
+    {
+        return $this->uploadFile($file, 'products');
+    }
+
+    public function updateProductFile($newFile, $oldPath)
+    {
+        return $this->updateFile($newFile, $oldPath, 'products');
+    }
+
+    /**
+     * Shortcut khusus untuk foto umum (folder: photos)
+     */
+    public function uploadPhotoFile($file)
+    {
+        return $this->uploadFile($file, 'photos');
+    }
+
+    public function updatePhotoFile($newFile, $oldPath)
+    {
+        return $this->updateFile($newFile, $oldPath, 'photos');
     }
 }

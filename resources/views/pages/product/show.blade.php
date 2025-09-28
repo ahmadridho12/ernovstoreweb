@@ -11,28 +11,28 @@
             <div class="row">
                 <!-- Kolom foto produk -->
                 <div class="col-md-6">
-                    @if($product->photos->count())
+                    @if ($product->photos->count())
                         <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
-                                @foreach($product->photos as $key => $photo)
-                                    <img src="{{ asset('products/' . basename($photo->foto)) }}"
-                                    class="d-block w-100"
-                                    alt="{{ $product->nama }}"
-                                    style="object-fit: cover; height: 300px;">
-
+                                @foreach ($product->photos as $key => $photo)
+                                    <img src="{{ $photo->foto_url }}" class="d-block w-100" alt="{{ $product->nama }}"
+                                        style="object-fit: cover; height: 300px;">
                                 @endforeach
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                            <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
+                                data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">{{ __('Previous') }}</span>
                             </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                            <button class="carousel-control-next" type="button" data-bs-target="#productCarousel"
+                                data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">{{ __('Next') }}</span>
                             </button>
                         </div>
                     @else
-                        <img src="https://via.placeholder.com/400x300?text=No+Image" alt="{{ $product->nama }}" class="img-fluid">
+                        <img src="https://via.placeholder.com/400x300?text=No+Image" alt="{{ $product->nama }}"
+                            class="img-fluid">
                     @endif
                 </div>
 

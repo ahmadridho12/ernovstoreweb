@@ -1,6 +1,5 @@
 <?php
 
-// app/Models/Categoris.php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -23,19 +22,12 @@ class Categoris extends Model
     }
 
     /**
-     * Accessor untuk URL foto kategori - kompatibel lokal & shared hosting
+     * Accessor untuk URL foto kategori
+     * (otomatis handle lokal & hosting pakai helper)
      */
     public function getFotoUrlAttribute()
     {
-        if (empty($this->foto)) {
-            return asset('images/default-category.jpg');
-        }
-
-        if (file_exists(public_path('storage'))) {
-            return asset('storage/photos/' . basename($this->foto));
-        }
-
-        return url('/storage/photos/' . basename($this->foto));
+        return category_image_url($this->foto);
     }
 
     /**
