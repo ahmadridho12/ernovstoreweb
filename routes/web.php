@@ -50,7 +50,22 @@ Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'index']
 // Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
 Route::get('/sample-colors', [SampleColorController::class, 'userIndex'])->name('sample_colors.user_index');
+// Route untuk handle storage files di shared hosting
+Route::get('/storage/{folder}/{filename}', function ($folder, $filename) {
+    $path = public_path("storage/{$folder}/{$filename}");
 
+    if (file_exists($path)) {
+        return response()->file($path);
+    }
+
+    // Fallback ke storage/app/public jika file ada disana
+    $storagePath = storage_path("app/public/{$folder}/{$filename}");
+    if (file_exists($storagePath)) {
+        return response()->file($storagePath);
+    }
+
+    abort(404);
+})->where(['folder' => '[a-zA-Z0-9_-]+', 'filename' => '[a-zA-Z0-9._-]+']);
 // Rute yang memerlukan login
 Route::middleware(['auth', 'session.timeout'])->group(function () {
     // Halaman yang sebelumnya ditandai sebagai home sekarang diubah menjadi PageController
@@ -96,7 +111,7 @@ Route::middleware(['auth', 'session.timeout'])->group(function () {
         Route::resource('{letter}/disposition', \App\Http\Controllers\DispositionController::class)->except(['show']);
     });
 
-   
+
     Route::prefix('agenda')->as('agenda.')->group(function () {
         Route::get('incoming', [\App\Http\Controllers\IncomingLetterController::class, 'agenda'])->name('incoming');
         Route::get('incoming/print', [\App\Http\Controllers\IncomingLetterController::class, 'print'])->name('incoming.print');
@@ -114,16 +129,16 @@ Route::middleware(['auth', 'session.timeout'])->group(function () {
         Route::resource('status', \App\Http\Controllers\LetterStatusController::class)->except(['show', 'create', 'edit']);
     });
 
-    
+
 
     Route::prefix('master')->as('master.')->group(function () {
-      
+
         Route::resource('slider', \App\Http\Controllers\SliderController::class)->except(['show', 'create', 'edit']);
         Route::resource('category', \App\Http\Controllers\CategorisController::class)->except(['show', 'create', 'edit']);
-       
 
 
-    
+
+
     });
     Route::prefix('sample')->as('sample.')->group(function () {
     Route::resource('colors', SampleColorController::class)->except(['show', 'create', 'edit']);
@@ -145,7 +160,7 @@ Route::middleware(['auth', 'session.timeout'])->group(function () {
         Route::delete('/{id}', [ProductController::class, 'destroy'])->name('destroy');
         Route::delete('/{id}/photo/{photoId}', [ProductController::class, 'deletePhoto'])->name('photo.destroy');
     });
-    
+
 });
 Route::get('/storage/{folder}/{filename}', function ($folder, $filename) {
     $allowedFolders = ['photos', 'products', 'sample_color'];

@@ -1,26 +1,48 @@
 <?php
 
+// app/Models/Categoris.php
 namespace App\Models;
-use App\Models\Product;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Categoris extends Model
 {
-    use HasFactory;
     protected $table = 'kategoris';
     protected $primaryKey = 'id_category';
+
     protected $fillable = [
-        'nama',
-        'judul',
-        'foto',
-        'foto_sampul' ,
+        'nama', 'judul', 'foto', 'status', 'deskripsi'
     ];
 
-
-    public function products(): HasMany
+    /**
+     * Relasi ke products
+     */
+    public function products()
     {
         return $this->hasMany(Product::class, 'kategori_id', 'id_category');
+    }
+
+    /**
+     * Accessor untuk URL foto kategori - kompatibel lokal & shared hosting
+     */
+    public function getFotoUrlAttribute()
+    {
+        if (empty($this->foto)) {
+            return asset('images/default-category.jpg');
+        }
+
+        if (file_exists(public_path('storage'))) {
+            return asset('storage/photos/' . basename($this->foto));
+        }
+
+        return url('/storage/photos/' . basename($this->foto));
+    }
+
+    /**
+     * Scope untuk kategori aktif
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
     }
 }

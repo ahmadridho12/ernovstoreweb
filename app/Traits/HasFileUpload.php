@@ -6,40 +6,44 @@ use Illuminate\Support\Facades\Storage;
 
 trait HasFileUpload
 {
-    /**
-     * Upload file langsung ke folder public tertentu di hosting
-     */
     public function uploadFile($file, $folder = 'photos')
     {
         $filename = uniqid() . '.' . $file->extension();
-        $destination = '/home/zrnn6322/public_html/katalog.zrnfarm.com/' . $folder;
 
-        // Pastikan folder ada
-        if (!is_dir($destination)) {
-            mkdir($destination, 0755, true);
+        if (app()->environment('production')) {
+            // 🚀 Simpan langsung ke public_html (hosting)
+            $destination = '/home/zrnn6322/public_html/katalog.zrnfarm.com/' . $folder;
+
+            if (!is_dir($destination)) {
+                mkdir($destination, 0755, true);
+            }
+
+            $file->move($destination, $filename);
+
+            return $folder . '/' . $filename;
+        } else {
+            // 🚀 Simpan ke storage Laravel (local)
+            return $file->storeAs($folder, $filename, 'public');
         }
-
-        $file->move($destination, $filename);
-
-        // Return relative path untuk disimpan di DB
-        return $folder . '/' . $filename;
     }
 
-    /**
-     * Delete file dari folder public
-     */
     public function deleteFile($path)
     {
-        $fullPath = '/home/zrnn6322/public_html/katalog.zrnfarm.com/' . $path;
+        if (!$path) return;
 
-        if ($path && file_exists($fullPath)) {
-            unlink($fullPath);
+        if (app()->environment('production')) {
+            $fullPath = '/home/zrnn6322/public_html/katalog.zrnfarm.com/' . $path;
+
+            if (file_exists($fullPath)) {
+                unlink($fullPath);
+            }
+        } else {
+            if (Storage::disk('public')->exists($path)) {
+                Storage::disk('public')->delete($path);
+            }
         }
     }
 
-    /**
-     * Update file (delete old, upload new)
-     */
     public function updateFile($newFile, $oldPath, $folder = 'photos')
     {
         $this->deleteFile($oldPath);
