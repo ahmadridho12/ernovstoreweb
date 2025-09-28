@@ -19,13 +19,20 @@ trait HasFileUpload
             // hasil: photos/nama.jpg atau products/nama.jpg
         } else {
             // 🚀 Hosting (tanpa symlink → langsung ke public_html/folder)
-            $destination = public_path($folder);
+            $destination = base_path('../katalog.zrnfarm.com/' . $folder);
+            if (!is_dir($destination)) {
+                mkdir($destination, 0755, true);
+            }
+            $file->move($destination, $filename);
+
+            return $folder . '/' . $filename;$destination = $_SERVER['DOCUMENT_ROOT'] . '/' . $folder;
             if (!is_dir($destination)) {
                 mkdir($destination, 0755, true);
             }
             $file->move($destination, $filename);
 
             return $folder . '/' . $filename;
+
         }
     }
 
