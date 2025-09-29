@@ -162,7 +162,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
     height: 38px;
     bottom: 0px;
     right: 40px;
-    background-color: #717fe0;
+    background-color: #000000;
     opacity: 0.5;
     justify-content: center;
     align-items: center;
@@ -182,7 +182,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 .btn-back-to-top:hover {
     opacity: 1;
-    background-color: #717fe0;
+    background-color: #000000;
 }
 
 @media (max-width: 575px) {
@@ -2866,7 +2866,7 @@ input.num-product::-webkit-inner-spin-button {
     background-color: #fff;
 }
 .bg1 {
-    background-color: #717fe0;
+    background-color: #000000;
 }
 .bg2 {
     background-color: #e6e6e6;
