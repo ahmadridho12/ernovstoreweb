@@ -101,9 +101,22 @@
                             {{ $product->nama }}
                         </h4>
 
-                        <span class="mtext-106 cl2">
-                            Rp {{ number_format($product->harga, 0, ',', '.') }}
-                        </span>
+                        <div class="product-price-section">
+                            @if ($product->status === 'active' && $product->harga_diskon)
+                                <span class="current-price text-danger fw-bold" style="font-size: 20px;">
+                                    Rp {{ number_format($product->harga_diskon, 0, ',', '.') }}
+                                </span>
+                                <span class="original-price text-muted"
+                                    style="text-decoration: line-through; margin-left: 8px;">
+                                    Rp {{ number_format($product->harga, 0, ',', '.') }}
+                                </span>
+                            @else
+                                <span class="current-price fw-bold" style="font-size: 20px;">
+                                    Rp {{ number_format($product->harga, 0, ',', '.') }}
+                                </span>
+                            @endif
+                        </div>
+
 
                         <p class="stext-102 cl3 p-t-23">
                             {{ $product->subjudul }}
@@ -122,10 +135,7 @@
                                 </a>
                             </div>
 
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                                data-tooltip="Facebook">
-                                <i class="fa fa-facebook"></i>
-                            </a>
+
 
                             <a href="#"
                                 class="js-share-b2 fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
@@ -136,15 +146,7 @@
                                     style="width:24px; height:24px;">
                             </a>
 
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                                data-tooltip="Twitter">
-                                <i class="fa fa-twitter"></i>
-                            </a>
 
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                                data-tooltip="Google Plus">
-                                <i class="fa fa-google-plus"></i>
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -454,23 +456,7 @@
                                     </a>
                                 </div>
 
-                                <a href="#"
-                                    class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                                    data-tooltip="Facebook">
-                                    <i class="fa fa-facebook"></i>
-                                </a>
 
-                                <a href="#"
-                                    class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                                    data-tooltip="Twitter">
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-
-                                <a href="#"
-                                    class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                                    data-tooltip="Google Plus">
-                                    <i class="fa fa-google-plus"></i>
-                                </a>
                             </div>
                         </div>
                     </div>
