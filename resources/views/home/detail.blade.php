@@ -76,12 +76,12 @@
 
                             <div class="slick3 gallery-lb">
                                 @foreach ($product->photos as $photo)
-                                    <div class="item-slick3" data-thumb="{{ asset('storage/' . $photo->foto) }}">
+                                    <div class="item-slick3" data-thumb="{{ product_image_url($photo->foto) }}">
                                         <div class="wrap-pic-w pos-relative">
-                                            <img src="{{ asset('storage/' . $photo->foto) }}"
+                                            <img src="{{ product_image_url($photo->foto) }}"
                                                 alt="{{ $product->nama }}" loading="lazy">
                                             <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                                href="{{ asset('storage/' . $photo->foto) }}">
+                                                href="{{ product_image_url($photo->foto) }}">
                                                 <i class="fa fa-expand"></i>
                                             </a>
                                         </div>
@@ -261,15 +261,16 @@
                     @forelse($relatedProducts as $rel)
                         <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
                             <div class="block2">
-                                <div class="block2-pic hov-img0">
+
+                                <div class="block2-pic hov-img0" style="height: 300px; overflow: hidden;">
                                     @if ($rel->photos->isNotEmpty())
-                                        <img src="{{ asset('storage/' . $rel->photos->first()->foto) }}"
-                                            alt="{{ $rel->nama }}" loading="lazy">
+                                        <img src="{{ product_image_url($rel->photos->first()->foto) }}"
+                                            alt="{{ $rel->nama }}" loading="lazy"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
                                     @else
-                                        <img src="{{ asset('images/default-product.jpg') }}" alt="Default">
+                                        <img src="{{ asset('images/default-product.jpg') }}" alt="Default Product"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
                                     @endif
-
-
 
                                     <a href="{{ route('home.detail', $rel->slug) }}"
                                         class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
@@ -301,15 +302,8 @@
                                             </span>
                                         @endif
                                     </div>
-                                    {{-- <div class="block2-txt-child2 flex-r p-t-3">
-						<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-						  <img class="icon-heart1 dis-block trans-04"
-							   src="{{ asset('images/icons/icon-heart-01.png') }}" alt="ICON">
-						  <img class="icon-heart2 dis-block trans-04 ab-t-l"
-							   src="{{ asset('images/icons/icon-heart-02.png') }}" alt="ICON">
-						</a>
-					  </div> --}}
                                 </div>
+
                             </div>
                         </div>
                     @empty
@@ -319,6 +313,7 @@
             </div>
         </div>
     </section>
+
 
 
 
@@ -353,17 +348,18 @@
 
                                 <div class="slick3 gallery-lb">
                                     @foreach ($product->photos as $photo)
-                                        <div class="item-slick3" data-thumb="{{ asset('storage/' . $photo->foto) }}">
+                                        <div class="item-slick3" data-thumb="{{ product_image_url($photo->foto) }}">
                                             <div class="wrap-pic-w pos-relative">
-                                                <img src="{{ asset('storage/' . $photo->foto) }}"
-                                                    alt="{{ $product->nama }}">
+                                                <img src="{{ product_image_url($photo->foto) }}"
+                                                    alt="{{ $product->nama }}" loading="lazy">
                                                 <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                                    href="{{ asset('storage/' . $photo->foto) }}">
+                                                    href="{{ product_image_url($photo->foto) }}">
                                                     <i class="fa fa-expand"></i>
                                                 </a>
                                             </div>
                                         </div>
                                     @endforeach
+
                                 </div>
 
                             </div>
