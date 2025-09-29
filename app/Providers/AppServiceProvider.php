@@ -1,13 +1,17 @@
 <?php
 
 namespace App\Providers;
+use App\Models\Product;
 use App\Models\Categoris;
+use App\Models\Slider;
 use Illuminate\Support\Facades\View;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use App\Services\MonitoringPakanGeneratorService;
-
+use App\Observers\ProductObserver;
+use App\Observers\CategorisObserver;
+use App\Observers\SliderObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,8 +34,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
 {
-    \App\Models\Product::observe(\App\Observers\ProductObserver::class);
-
+Product::observe(ProductObserver::class);
+    Categoris::observe(CategorisObserver::class);
+    Slider::observe(SliderObserver::class);
     Paginator::useBootstrapFive();
 
     // Share data kategori ke semua view
