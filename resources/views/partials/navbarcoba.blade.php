@@ -524,9 +524,6 @@
             <h3>SHOP</h3>
             <a href="{{ url('/') }}" class="menu-item">Home</a>
             <a href="{{ route('home.productss') }}" class="menu-item">New Arrivals</a>
-            <a href="{{ route('home.productss') }}" class="menu-item">Women</a>
-            <a href="{{ route('home.productss') }}" class="menu-item">Men</a>
-            <a href="{{ route('home.productss') }}" class="menu-item">Accessories</a>
             <a href="{{ route('home.productss') }}" class="menu-item">Shop All</a>
         </div>
 
@@ -535,9 +532,10 @@
             <h3>CATEGORIES</h3>
             <a href="{{ route('home.productss') }}" class="menu-item">All Products</a>
             @foreach ($kategoriFooter as $kategori)
-                <a href="{{ route('home.productss', ['category' => $kategori->slug ?? $kategori->id]) }}"
+                <a href="{{ route('home.productss', ['kategori' => $kategori->nama]) }}"
                     class="menu-item">{{ $kategori->nama }}</a>
             @endforeach
+
         </div>
 
         <!-- About Section -->
