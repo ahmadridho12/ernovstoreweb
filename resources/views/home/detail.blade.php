@@ -220,6 +220,24 @@
             bottom: 0;
             left: 0;
             right: 0;
+            padding: 14px 16px;
+            background: linear-gradient(to top,
+                    rgba(0, 0, 0, 0.75) 0%,
+                    rgba(0, 0, 0, 0.45) 50%,
+                    rgba(0, 0, 0, 0.15) 85%,
+                    transparent 100%);
+            color: #fff;
+            border-radius: 0 0 16px 16px;
+            opacity: 1;
+            transform: none;
+        }
+
+
+        /* .product-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
             padding: 16px;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 50%, transparent 100%);
             color: white;
@@ -232,44 +250,47 @@
         .product-card:hover .product-info {
             transform: translateY(0);
             opacity: 1;
-        }
+        } */
 
+        /* kategori kecil dan elegan */
         .product-category {
             font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 0.8px;
+            color: rgba(255, 255, 255, 0.85);
             font-weight: 500;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
+        /* nama lebih rapi dan proporsional */
         .product-name {
-            font-size: 16px;
-            font-weight: 700;
-            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
             line-height: 1.3;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
 
+        /* harga tampil jelas tapi tetap clean */
         .product-price-section {
             display: flex;
             flex-direction: column;
-            gap: 2px;
-            margin-bottom: 8px;
+            gap: 1px;
+            margin-bottom: 4px;
         }
 
         .currentt-price {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             color: #ffffff;
         }
 
         .originall-price {
-            font-size: 13px;
+            font-size: 12px;
             color: rgba(255, 255, 255, 0.7);
             text-decoration: line-through;
         }

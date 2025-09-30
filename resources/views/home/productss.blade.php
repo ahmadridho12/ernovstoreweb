@@ -283,19 +283,41 @@
         }
 
         /* Product Info - Overlay di atas gambar */
+        /* .product-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 14px 16px;
+            background: linear-gradient(to top,
+                    rgba(0, 0, 0, 0.75) 0%,
+                    rgba(0, 0, 0, 0.45) 50%,
+                    rgba(0, 0, 0, 0.15) 85%,
+                    transparent 100%);
+            color: #fff;
+            border-radius: 0 0 16px 16px;
+            opacity: 1;
+            transform: none;
+        } */
+
         .product-info {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
             padding: 16px;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 50%, transparent 100%);
+            background: linear-gradient(to top,
+                    rgba(0, 0, 0, 0.55) 0%,
+                    rgba(0, 0, 0, 0.35) 40%,
+                    rgba(0, 0, 0, 0.15) 80%,
+                    transparent 100%);
             color: white;
             border-radius: 0 0 16px 16px;
             transform: translateY(10px);
             opacity: 0;
             transition: all 0.3s ease;
         }
+
 
         .product-card:hover .product-info {
             transform: translateY(0);

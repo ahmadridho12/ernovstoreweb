@@ -52,7 +52,7 @@
             infinite: true,
             autoplay: true,
             autoplaySpeed: 6000,
-            arrows: true,
+            arrows: false,
             appendArrows: $(wrapSlick1),
             prevArrow:
                 '<button class="arrow-slick1 prev-slick1"><i class="zmdi zmdi-caret-left"></i></button>',
@@ -114,7 +114,7 @@
                 infinite: false,
                 autoplay: false,
                 autoplaySpeed: 6000,
-                arrows: true,
+                arrows: false,
                 appendArrows: $(this),
                 prevArrow:
                     '<button class="arrow-slick2 prev-slick2"><i class="fa fa-angle-left" aria-hidden="true"></i></button>',
@@ -171,7 +171,7 @@
                 autoplay: false,
                 autoplaySpeed: 6000,
 
-                arrows: true,
+                arrows: false,
                 appendArrows: $(this).find(".wrap-slick3-arrows"),
                 prevArrow:
                     '<button class="arrow-slick3 prev-slick3"><i class="fa fa-angle-left" aria-hidden="true"></i></button>',
