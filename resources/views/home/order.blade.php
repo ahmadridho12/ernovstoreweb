@@ -36,7 +36,7 @@
 
 <body class="animsition">
     <!-- Navbar -->
-    @include('partials.navbarsim')
+    @include('partials.navbarcoba')
     <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('{{ asset('bag.png') }}');">
         <h2 class="ltext-105 cl0 txt-center" style="color: #404040;">
             How to Order
