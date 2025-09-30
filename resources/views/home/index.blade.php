@@ -42,7 +42,8 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/util.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('css/main.css?v=' . filemtime(public_path('css/main.css'))) }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-pb+Y1mS8oDoLQEPt6vDf8rSM1MZm3yQk8zI4D1jVJYV3sY+f8Z5X09j6+jgq9M5ZeZmczfyXhE2f4p6Uz5+ETQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
