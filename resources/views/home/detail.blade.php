@@ -38,6 +38,276 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/util.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
+    <style>
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 1px 6px rgba(32, 33, 36, .28);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            width: 100%;
+            position: relative;
+            display: block;
+        }
+
+        .product-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(32, 33, 36, .28);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.02);
+        }
+
+        /* Pinterest-style random heights menggunakan grid-row-end */
+        .product-card:nth-child(6n+1) {
+            grid-row-end: span 26;
+        }
+
+        .product-card:nth-child(6n+2) {
+            grid-row-end: span 18;
+        }
+
+        .product-card:nth-child(6n+3) {
+            grid-row-end: span 22;
+        }
+
+        .product-card:nth-child(6n+4) {
+            grid-row-end: span 20;
+        }
+
+        .product-card:nth-child(6n+5) {
+            grid-row-end: span 24;
+        }
+
+        .product-card:nth-child(6n+6) {
+            grid-row-end: span 19;
+        }
+
+        /* Variasi tambahan untuk lebih natural */
+        .product-card:nth-child(8n+1) {
+            grid-row-end: span 28;
+        }
+
+        .product-card:nth-child(8n+3) {
+            grid-row-end: span 17;
+        }
+
+        .product-card:nth-child(8n+5) {
+            grid-row-end: span 25;
+        }
+
+        .product-card:nth-child(8n+7) {
+            grid-row-end: span 21;
+        }
+
+        /* Atau alternatif dengan aspect-ratio yang lebih natural */
+        .product-card:nth-child(10n+1) .product-image {
+            aspect-ratio: 3/4;
+        }
+
+        .product-card:nth-child(10n+2) .product-image {
+            aspect-ratio: 4/3;
+        }
+
+        .product-card:nth-child(10n+3) .product-image {
+            aspect-ratio: 1/1;
+        }
+
+        .product-card:nth-child(10n+4) .product-image {
+            aspect-ratio: 2/3;
+        }
+
+        .product-card:nth-child(10n+5) .product-image {
+            aspect-ratio: 3/2;
+        }
+
+        .product-card:nth-child(10n+6) .product-image {
+            aspect-ratio: 5/4;
+        }
+
+        .product-card:nth-child(10n+7) .product-image {
+            aspect-ratio: 4/5;
+        }
+
+        .product-card:nth-child(10n+8) .product-image {
+            aspect-ratio: 3/4;
+        }
+
+        .product-card:nth-child(10n+9) .product-image {
+            aspect-ratio: 1/1;
+        }
+
+        .product-card:nth-child(10n+10) .product-image {
+            aspect-ratio: 2/3;
+        }
+
+        /* Mobile: tinggi seragam */
+        @media (max-width: 768px) {
+            .product-card {
+                grid-row-end: auto !important;
+            }
+
+            /* .product-card .product-image {
+                aspect-ratio: 1/1 !important;
+            } */
+        }
+
+        /* Product Overlay - Pinterest Style */
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+
+        .quick-view-btn {
+            background: #404040;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 24px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            transform: scale(0.9);
+            opacity: 0;
+        }
+
+        .product-card:hover .quick-view-btn {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .quick-view-btn:hover {
+            background: #404040;
+            transform: scale(1.05);
+        }
+
+        /* Product Info - Overlay di atas gambar */
+        .product-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 50%, transparent 100%);
+            color: white;
+            border-radius: 0 0 16px 16px;
+            transform: translateY(10px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover .product-info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .product-category {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .product-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            line-height: 1.3;
+            margin-bottom: 6px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-price-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin-bottom: 8px;
+        }
+
+        .currentt-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .originall-price {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: line-through;
+        }
+
+        .product-actions-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .share-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            padding: 6px;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .share-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .share-btn img {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.3s ease;
+            filter: brightness(0) invert(1);
+        }
+    </style>
 </head>
 
 <body class="animsition">
@@ -260,57 +530,61 @@
 
             <div class="wrap-slick2">
                 <div class="slick2">
-                    @forelse($relatedProducts as $rel)
+                    @forelse($relatedProducts as $product)
                         <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                            <div class="block2">
+                            <div class="product-card isotope-item {{ strtolower($product->kategori->nama) }}"
+                                data-color="{{ $product->color }}"
+                                data-price="{{ $product->harga_diskon ?? $product->harga }}">
 
-                                <div class="block2-pic hov-img0" style="height: 300px; overflow: hidden;">
-                                    @if ($rel->photos->isNotEmpty())
-                                        <img src="{{ product_image_url($rel->photos->first()->foto) }}"
-                                            alt="{{ $rel->nama }}" loading="lazy"
-                                            style="width: 100%; height: 100%; object-fit: cover;">
-                                    @else
-                                        <img src="{{ asset('images/default-product.jpg') }}" alt="Default Product"
-                                            style="width: 100%; height: 100%; object-fit: cover;">
-                                    @endif
-
-                                    <a href="{{ route('home.detail', $rel->slug) }}"
-                                        class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
-                                        Quick View
+                                <div class="product-image">
+                                    <a href="{{ route('home.detail', $product->slug) }}">
+                                        @if ($product->photos->isNotEmpty())
+                                            <img src="{{ product_image_url($product->photos->first()->foto) }}"
+                                                alt="{{ $product->nama }}" loading="lazy">
+                                        @else
+                                            <img src="{{ asset('images/default-product.jpg') }}"
+                                                alt="Default Product">
+                                        @endif
                                     </a>
                                 </div>
 
-                                <div class="block2-txt flex-w flex-t p-t-14">
-                                    <div class="block2-txt-child1 flex-col-l">
-                                        <a href="{{ route('home.detail', $rel->slug) }}"
-                                            class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"
-                                            style="font-size: 16px; line-height: 19px; font-weight: 500; color: #404040;">
-                                            {{ $rel->nama }}
-                                        </a>
+                                <div class="product-info">
+                                    <div class="product-category">{{ $product->kategori->nama }}</div>
 
-                                        @if ($rel->status === 'active' && $rel->harga_diskon)
-                                            <span class="stext-105"
-                                                style="font-size: 16px; font-weight: 500; line-height: 19px; color: #404040;">
-                                                Rp {{ number_format($rel->harga_diskon, 0, ',', '.') }}
+                                    <div class="product-name js-name-b2">
+                                        {{ $product->nama }}
+                                    </div>
+
+                                    <div class="product-price-section">
+                                        @if ($product->status === 'active' && $product->harga_diskon)
+                                            <span class="currentt-price">
+                                                Rp {{ number_format($product->harga_diskon, 0, ',', '.') }}
                                             </span>
-                                            <span class="stext-105"
-                                                style="font-size: 14px; line-height: 19px; text-decoration: line-through; color: #E0E0E0;">
-                                                Rp {{ number_format($rel->harga, 0, ',', '.') }}
+                                            <span class="originall-price">
+                                                Rp {{ number_format($product->harga, 0, ',', '.') }}
                                             </span>
                                         @else
-                                            <span class="stext-105"
-                                                style="font-size: 16px; font-weight: bold; line-height: 19px; color: #404040;">
-                                                Rp {{ number_format($rel->harga, 0, ',', '.') }}
+                                            <span class="currentt-price">
+                                                Rp {{ number_format($product->harga, 0, ',', '.') }}
                                             </span>
                                         @endif
                                     </div>
-                                </div>
 
+                                    <div class="product-actions-bottom">
+                                        <button class="share-btn js-share-b2"
+                                            data-url="{{ route('home.detail', $product->slug) }}"
+                                            data-title="{{ $product->nama }}"
+                                            data-text="Check out this amazing product: {{ $product->nama }}">
+                                            <img src="{{ asset('images/icons/share.png') }}" alt="Share">
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     @empty
-                        <p class="text-center w-100">Tidak ada produk terkait.</p>
+                        <p class="text-center w-100">No related products found.</p>
                     @endforelse
+
                 </div>
             </div>
         </div>
