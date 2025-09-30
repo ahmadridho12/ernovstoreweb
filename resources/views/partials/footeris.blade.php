@@ -307,7 +307,7 @@
             <!-- Brand Section -->
             <div class="footer-brand animate-fade-in">
                 <img src="{{ asset('images/icons/logoernovnewwhite.svg') }}" alt="Ernov Bali" class="footer-logo">
-                <p class="footer-tagline">Crafted Excellence Since 2020</p>
+                <p class="footer-tagline">Crafted Excellence Since 2008</p>
             </div>
 
             <!-- Main Content -->
